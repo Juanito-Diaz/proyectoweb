@@ -97,5 +97,10 @@
   </div>
 
   <script src="./js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      llamarProducto();
+    });
+  </script>
 </body>
 </html>

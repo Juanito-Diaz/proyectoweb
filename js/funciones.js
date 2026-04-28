@@ -207,3 +207,8 @@ function mostrarNotificacion(mensaje, tipo = 'success') {
     toastBody.textContent = mensaje;
     new bootstrap.Toast(toastEl).show();
 }
+
+function descargarReporte(tipo) {
+    console.log("Generando reporte de " + tipo + "...");
+    window.location.href = "descargar_reporte.php?tipo=" + tipo;
+}

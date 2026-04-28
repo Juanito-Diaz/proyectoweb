@@ -14,6 +14,9 @@ try {
             <p class="text-muted small mb-0">Gestión de la base de datos de clientes.</p>
         </div>
         <div class="col-auto">
+            <button type="button" class="btn btn-outline-danger shadow-sm me-2" onclick="descargarReporte('clientes')">
+                <i class="bi bi-file-earmark-pdf me-2"></i> Descargar Reporte
+            </button>
             <button type="button" class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#modalNuevoCliente">
                 <i class="bi bi-person-plus me-2"></i> Nuevo Cliente
             </button>
