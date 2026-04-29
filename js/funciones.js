@@ -21,6 +21,16 @@ function llamarClientes() {
 }
 
 function guardarNuevoCliente() {
+    var rfc = $("#rfc_nuevo").val();
+    if (rfc.length > 13) {
+        mostrarNotificacion("El RFC no puede tener más de 13 caracteres", "danger");
+        return;
+    }
+    if (rfc.length < 13) {
+        mostrarNotificacion("El RFC debe tener exactamente 13 caracteres", "warning");
+        return;
+    }
+
     var datos = $("#formCliente").serialize();
     $.ajax({
         url: "guardar_cliente.php",
@@ -58,10 +68,20 @@ function cargarDatosClienteE(id, nombre, ap_paterno, ap_materno, rfc) {
     $("#upd_cliente_nombre").val(nombre);
     $("#upd_cliente_ap_paterno").val(ap_paterno);
     $("#upd_cliente_ap_materno").val(ap_materno);
-    $("#upd_cliente_rfc").val(rfc);
+    $("#upd_cliente_rfc").val(rfc).trigger('input'); // Disparamos la validación visual
 }
 
 function guardarActualizacionCliente() {
+    var rfc = $("#upd_cliente_rfc").val();
+    if (rfc.length > 13) {
+        mostrarNotificacion("El RFC no puede tener más de 13 caracteres", "danger");
+        return;
+    }
+    if (rfc.length < 13) {
+        mostrarNotificacion("El RFC debe tener exactamente 13 caracteres", "warning");
+        return;
+    }
+
     var datos = $("#formActualizarCliente").serialize();
     $.ajax({
         url: "actualizar_cliente.php",
@@ -212,3 +232,20 @@ function descargarReporte(tipo) {
     console.log("Generando reporte de " + tipo + "...");
     window.location.href = "descargar_reporte.php?tipo=" + tipo;
 }
+
+// Validación en tiempo real para RFC (Nuevo y Editar)
+$(document).on('input', '#rfc_nuevo, #upd_cliente_rfc', function() {
+    var length = $(this).val().length;
+    var errorDiv = ($(this).attr('id') === 'rfc_nuevo') ? $('#rfc_error') : $('#rfc_error_upd');
+    
+    if (length > 13) {
+        errorDiv.text("Te has pasado de los 13 caracteres permitidos (" + length + ")").removeClass("text-muted text-success").addClass("text-danger");
+        $(this).addClass("is-invalid").removeClass("is-valid");
+    } else if (length === 13) {
+        errorDiv.text("Longitud correcta (13 caracteres)").removeClass("text-muted text-danger").addClass("text-success");
+        $(this).removeClass("is-invalid").addClass("is-valid");
+    } else {
+        errorDiv.text("Faltan " + (13 - length) + " caracteres por rellenar").removeClass("text-danger text-success").addClass("text-muted");
+        $(this).removeClass("is-invalid is-valid");
+    }
+});

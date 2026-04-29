@@ -81,7 +81,8 @@ try {
                     </div>
                     <div class="mb-0">
                         <label class="form-label small fw-bold">RFC</label>
-                        <input type="text" class="form-control" name="rfc" required>
+                        <input type="text" class="form-control" name="rfc" id="rfc_nuevo" required>
+                        <div id="rfc_error" class="form-text text-muted">El RFC debe tener exactamente 13 caracteres.</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -120,6 +121,7 @@ try {
                     <div class="mb-0">
                         <label class="form-label small fw-bold">RFC</label>
                         <input type="text" class="form-control" name="rfc" id="upd_cliente_rfc" required>
+                        <div id="rfc_error_upd" class="form-text text-muted">El RFC debe tener exactamente 13 caracteres.</div>
                     </div>
                 </div>
                 <div class="modal-footer">
