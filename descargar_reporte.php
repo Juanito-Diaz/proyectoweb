@@ -1,6 +1,7 @@
 <?php
 require_once 'auth.php';
 require_once 'db.php';
+date_default_timezone_set('America/Mexico_City');
 require_once 'vendor/autoload.php';
 
 use Dompdf\Dompdf;
@@ -54,7 +55,7 @@ $html = '
 <body>
     <div class="header">
         <h2>' . $titulo . '</h2>
-        <p>Generado el: ' . date('d/m/Y H:i') . '</p>
+        <p>Generado el: ' . date('d/m/Y h:i a') . '</p>
     </div>
     <table>
         <thead>
